@@ -26,13 +26,14 @@
   become_user: solr
   shell: /opt/solr/bin/solr create -c {{ solr_core }} -d basic_configs creates=/var/solr/data/{{ solr_core }}
 
-- name: symlink schema from code to solr
+- name: schema from code to solr
   become: yes
-  file: src={{ app_root }}/solr/config/schema.xml dest=/var/solr/data/{{ solr_core }}/conf/schema.xml state=link force=yes
+  template: src=schema.xml.j2 dest=/var/solr/data/{{ solr_core }}/conf/schema.xml group=tomcat7 owner=tomcat7
 
-- name: symlink solrconfig from code to solr
+- name: solrconfig from code to solr
   become: yes
-  file: src={{ app_root }}/solr/config/solrconfig.xml dest=/var/solr/data/{{ solr_core }}/conf/solrconfig.xml state=link force=yes
+  template: src=solrconfig.xml.j2 dest=/var/solr/data/{{ solr_core }}/conf/solrconfig.xml group=tomcat7 owner=tomcat7
+
 
 - name: set the solr port
   set_fact:
