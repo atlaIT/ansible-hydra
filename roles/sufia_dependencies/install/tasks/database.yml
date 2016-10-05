@@ -7,3 +7,7 @@
 - name: postgresql
   include: postgresql.yml
   when: db == "postgresql"
+
+- name: rds
+  include: rds.yml
+  when: db == "rds"
