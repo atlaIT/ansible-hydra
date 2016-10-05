@@ -20,17 +20,27 @@
 
 - name: unzip tarball
   unarchive: src={{ magick_path }}/{{ im_zip }} dest={{ magick_path }} copy=no
+  args:
+    creates: /usr/local/bin/convert
 
 - name: configure ImageMagick
   shell: cd {{ im_dir }} && ./configure --prefix=/usr/local --with-modules=yes
+  args:
+    creates: /usr/local/bin/convert
 
 - name: make ImageMagick
   shell: cd {{ im_dir }} && make 
+  args:
+    creates: /usr/local/bin/convert
 
 - name: install ImageMagick
   become: yes
   shell: cd {{ im_dir }} && make install
+  args:
+    creates: /usr/local/bin/convert
 
 - name: link new ImageMagick
   become: yes
   shell: ldconfig
+  args:
+    creates: /usr/local/bin/convert
