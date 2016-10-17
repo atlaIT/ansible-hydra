@@ -4,3 +4,5 @@ ansible.log
 *.box
 *.retry
 Vagrantfile
+*.pem
+group_vars/all

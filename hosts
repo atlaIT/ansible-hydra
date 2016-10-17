@@ -1,25 +1,16 @@
 # Ansible Inventory
 
-# sample inventory
-
-[remote:children]
-production
-staging
-
-[servers:children]
-production
-staging
-local
-
-[production]
-www.myproject.com nickname=production vm=0 branch=master
-
-[staging]
-staging.myproject.com nickname=staging vm=0 branch=master
-
-[local]
-local.myproject.com nickname=local vm=1 branch=develop
-
 # EC2 boxes
 # Ansible will populate on initial box creation; you can also edit at will
 [ec2hosts]
+tomcat2 ansible_hosts=52.24.157.144
+tomcat1 ansible_host=54.186.174.157
+web1   ansible_host=52.36.138.65
+
+[tomcat]
+tomcat1 ansible_host=54.186.174.157
+tomcat2 ansible_host=52.24.157.144
+
+[web]
+web1   ansible_host=52.36.138.65
+

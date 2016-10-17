@@ -1,4 +1,7 @@
 ---
+- name: make sure initializers dir exists
+  file: path={{ shared_root }}/config/initializers state=directory mode=0755
+
 - name: create shared initializers
   become: yes
   template: src={{ item }}.j2 dest={{ shared_root }}/config/initializers/{{ item }} owner={{ capistrano_user }} group={{ capistrano_group }} backup=no
