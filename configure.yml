@@ -6,6 +6,7 @@
   user: ubuntu
   gather_facts: true
   roles:
+    - { role: hswong3i.hostname, become: yes, become_user: root, become_method: sudo }
     - { role: packages }
     - { role: set_timezone }
     - { role: system_setup }
@@ -15,7 +16,7 @@
     - { role: notch8.swap, tags: 'swap', become: yes, become_user: root, become_method: sudo }
     - { role: notch8.site24x7, tags: 'monitoring', become: yes, become_user: root, become_method: sudo }
     - { role: notch8.ssh, tags: 'permissions', become: yes, become_user: root, become_method: sudo }
-    - { role:  tersmitten.fail2ban, tags: 'fail2ban', become: yes, become_user: root, become_method: sudo }
+    - { role: tersmitten.fail2ban, tags: 'fail2ban', become: yes, become_user: root, become_method: sudo }
     - { role: ffmpeg }
     - { role: imagemagick }
 
