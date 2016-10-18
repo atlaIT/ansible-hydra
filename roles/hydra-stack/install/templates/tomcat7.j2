@@ -2,6 +2,6 @@
 TOMCAT7_USER=tomcat7
 TOMCAT7_GROUP=tomcat7
 JAVA_HOME={{ java_home }}
-JAVA_OPTS="-Dfcrepo.home=/opt/fedora-data -Djava.awt.headless=true -XX:+UseG1GC -XX:+UseCompressedOops -XX:-UseLargePagesIndividualAllocation -XX:MaxPermSize={{ tomcat_permgen_memory }} -Xms{{ tomcat_min_memory }} -Xmx{{ tomcat_max_memory }} -Djava.util.logging.config.file=/etc/tomcat7/logging.properties -Dfcrepo.modeshape.configuration=file:///config/clustered/repository.json -Dfcrepo.infinispan.cache_configuration=config/infinispan/clustered/infinispan.xml -Dfcrepo.ispn.numOwners=2 -Djava.net.PreferIPv4Stack=true  -Dfcrepo.ispn.jgroups.configuration=jgroups-ec2.xml -Djgroups.s3.bucket={{ s3_bucket }}"
+JAVA_OPTS=" -Djava.awt.headless=true -XX:+UseG1GC -XX:+UseCompressedOops -XX:-UseLargePagesIndividualAllocation -XX:MaxPermSize=128M -Xms512m -Xmx4096m -Djava.util.logging.config.file=/etc/tomcat7/logging.properties -Dfcrepo.modeshape.configuration=classpath:/config/jdbc-postgresql/repository.json -Dfcrepo.ispn.postgresql.username={{ hydra_pg_user }} -Dfcrepo.ispn.postgresql.username='{{ hydra_pg_pass }}' -Dfcrepo.ispn.postgresql.host={{ hydra_pg_host }} -Dfcrepo.ispn.postgresql.port={{ hydra_pg_port }} -Dfcrepo.home=/opt/fedora-data"
 
 
