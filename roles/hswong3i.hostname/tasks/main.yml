@@ -3,7 +3,7 @@
 
 - name: update hostname
   hostname:
-    name: "{{ inventory_hostname_short }}"
+    name: "{{ ec2_tag_Name }}"
   tags: hswong3i.hostname
 
 - name: copy templates

@@ -14,4 +14,11 @@
     - { role: mount_opt, data_device: /dev/xvdf }
     - { role: ec2 }
 
-- include: configure.yml hosts=newboxes
+- hosts: newboxes
+  name: reload inventory
+  user: ubuntu
+  gather_facts: false
+  tasks:
+    - meta: refresh_inventory
+
+- include: configure.yml

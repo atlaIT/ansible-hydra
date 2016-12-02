@@ -1,8 +1,7 @@
 ---
-# host group must be specified at command line, e.g.
-# ansible-playbook configure.yml -e hosts=ec2hosts
 - name: configuration
-  hosts: "{{ hosts }}"
+  hosts: "tag_Stack_hydra"
+  strategy: debug
   user: ubuntu
   gather_facts: true
   roles:
@@ -21,7 +20,7 @@
     - { role: imagemagick }
 
 - name: tomcat-solr-fedora
-  hosts: "tomcat"
+  hosts: "tag_Type_tomcat"
   user: ubuntu
   roles:
     - { role: openjdk1_8 }
@@ -29,7 +28,7 @@
     - { role: app-config }
 
 - name: ruby-webserver
-  hosts: "web"
+  hosts: "tag_Type_web"
   user: ubuntu
   roles:
     - { role: capistrano_setup }

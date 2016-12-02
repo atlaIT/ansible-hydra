@@ -13,7 +13,7 @@
 
 - name: read public key
   slurp:
-      src: /home/{{ ansible_ssh_user }}/.ssh/id_rsa.pub
+      src: "/home/{{ ansible_ssh_user }}/.ssh/id_rsa.pub"
   register: public_key
 
 - name: add public key to deploy user
@@ -25,11 +25,19 @@
 - name: clone repo 
   git: 
       repo: "{{ repo }}"
-      dest: /home/{{ ansible_ssh_user }}/{{ project_name }}
+      dest: "/home/{{ ansible_ssh_user }}/{{ project_name }}"
+      force: yes
+      update: no
 
 - name: setup repo - i.e. bundle install
-  shell: bundle install chdir=/home/{{ ansible_ssh_user }}/{{ project_name }}
+  shell: "bundle install chdir=/home/{{ ansible_ssh_user }}/{{ project_name }}"
+
+- name: put the web servers in to the capistrano deploy file
+  lineinfile:
+    dest: "/home/{{ ansible_ssh_user }}/{{ project_name }}/config/deploy/{{ deploy_target }}.rb"
+    insertbefore: BOF
+    line: "server '127.0.0.1', user: 'ubuntu', roles: %w{app db web}"
 
 - name: deploy to production directories with capistrano
-  shell: cap {{ deploy_target }} deploy chdir=/home/{{ ansible_ssh_user }}/{{ project_name }}
+  shell: "cap {{ deploy_target }} deploy chdir=/home/{{ ansible_ssh_user }}/{{ project_name }}"
 

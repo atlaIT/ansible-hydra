@@ -1,6 +1,6 @@
 # {{ ansible_managed }}
 {% if inventory_hostname_short != 'localhost' %}
-127.0.0.1	{{ inventory_hostname }}	{{ inventory_hostname_short }} localhost.localdomain localhost
+127.0.0.1	{{ ec2_tag_Name }} localhost.localdomain localhost
 {% else %}
 127.0.0.1	localhost.localdomain	localhost
 {% endif %}
@@ -13,8 +13,8 @@ ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 ff02::3 ip6-allhosts
 
-{% for item in groups['all'] %}
-{%     if hostvars[item].ansible_host is defined %}
-{{ hostvars[item].ansible_host }}	{{ hostvars[item].inventory_hostname }}	{{ hostvars[item].inventory_hostname_short }}
+{% for item in groups['tag_Stack_hydra'] %}
+{%     if hostvars[item].ec2_tag_Name is defined %}
+{{ item }}	{{ hostvars[item].ec2_tag_Name }}	
 {%     endif %}
 {% endfor %}

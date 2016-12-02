@@ -34,6 +34,11 @@
   become: yes
   template: src=solrconfig.xml.j2 dest=/var/solr/data/{{ solr_core }}/conf/solrconfig.xml group=tomcat7 owner=tomcat7
 
+- name: remove managed_schema
+  become: yes
+  file:
+    path: /var/solr/data/{{ solr_core }}/conf/managed-schema 
+    state: absent
 
 - name: set the solr port
   set_fact:

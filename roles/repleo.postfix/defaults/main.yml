@@ -3,7 +3,7 @@
 postfix_enabled: yes # The role is enabled
 
 postfix_smtpd_use_tls: yes
-postfix_myhostname: "{{inventory_hostname}}"
+postfix_myhostname: "{{ec2_tag_Name}}"
 postfix_myorigin: $myhostname
 postfix_smtp_sasl_auth_enable: 
 postfix_smtp_tls_cafile: "/etc/ssl/certs/Thawte_Premium_Server_CA.pem"
@@ -25,7 +25,7 @@ postfix_use_procmail: no
 
 # Install opendkim and setup postfix to use DKIM
 postfix_dkim: no
-postfix_dkim_domain: "{{inventory_hostname}}"
+postfix_dkim_domain: "{{ec2_tag_Name}}"
 
 # Relay all mail going to local users (e.g. root or cron) to another mail address
 postfix_local_user_relay_address: ""

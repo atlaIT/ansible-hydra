@@ -6,3 +6,5 @@ ansible.log
 Vagrantfile
 *.pem
 group_vars/all
+.DS_Store
+ec2.ini

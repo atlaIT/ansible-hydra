@@ -15,6 +15,12 @@
   become: yes
   package: name=ruby state=absent
 
+- name: create install directory
+  file:
+    path: /opt/install 
+    state: directory
+    mode: 0755
+
 - name: download ruby
   become: yes
   get_url: url={{ ruby_gzip_url }} sha256sum={{ ruby_sha_256 }} owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} dest={{ install_path }}/ruby-{{ ruby_ver }}.tar.gz
