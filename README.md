@@ -13,8 +13,8 @@ To create, set up an ec2 instance:
 2. Add your organization's AWS credentials there.
 3. Add/change any other variables you wish to override.
 4. Consider protecting group_vars/all with ansible-vault.
-5. run `ansible-playbook -i hosts --private-key /path/to/your/keypair.pem create_ec2.yml --extra-vars "hosts=tomcat"`
-5a.run `ansible-playbook -i hosts --private-key /path/to/your/keypair.pem create_ec2.yml --extra-vars "hosts="web"`
+5. run `ansible-playbook -i ec2.py --private-key /path/to/your/keypair.pem create_ec2.yml --extra-vars "hosts=tomcat"`
+5a.run `ansible-playbook -i ec2.py --private-key /path/to/your/keypair.pem create_ec2.yml --extra-vars "hosts="web"`
    * Optional: if you encrypted your variables with ansible-vault, add `--ask-vault-pass`
    * Optional: The scripts will by default launch an instance tagged 'staging'. If you want a different tag, override the 'aws_tag' variable either in a file (i.e. group_vars/all) or directly from the command line by adding: `--extra-vars "aws_tag=production"`
 6. Note that this playbook is NOT idempotent -- it creates a new instance on AWS each time it is run.
